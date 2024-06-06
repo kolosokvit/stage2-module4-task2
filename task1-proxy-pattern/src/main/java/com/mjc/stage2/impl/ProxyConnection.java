@@ -5,9 +5,11 @@ import com.mjc.stage2.Connection;
 
 public class ProxyConnection implements Connection {
     private RealConnection realConnection;
+    private boolean isClosed;
 
     public ProxyConnection(RealConnection realConnection) {
         this.realConnection = realConnection;
+        this.isClosed = realConnection.isClosed();
     }
 
     public void reallyClose() {
@@ -21,6 +23,6 @@ public class ProxyConnection implements Connection {
 
     @Override
     public boolean isClosed() {
-        return realConnection.isClosed();
+        return this.isClosed;
     }
 }
